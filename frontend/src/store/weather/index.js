@@ -3,23 +3,31 @@ import {createSlice} from "@reduxjs/toolkit";
 export const weatherSlice = createSlice({
     name: 'weather',
     initialState: {
-        city: 'Maastricht',
+        city: null,
+        weather: null,
         data: null,
-        loading: false
+        loading: false,
+        availableCities: []
     },
     reducers: {
-        setCity: (state, payload) => {
-            state.city = payload;
+        setCity: (state, action) => {
+            state.city = action.payload;
         },
-        setData: (state, payload) => {
-            state.data = payload;
+        setData: (state, action) => {
+            state.data = action.payload;
         },
-        setLoading: (state, payload) => {
-            state.loading = payload;
+        setWeather: (state, action) => {
+            state.weather = action.payload;
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        },
+        setAvailableCities: (state, action) => {
+            state.availableCities = action.payload;
         }
     }
 });
 
-export const { setCity, setData, setLoading } = weatherSlice.actions;
+export const { setCity, setData, setLoading, setAvailableCities, setWeather } = weatherSlice.actions;
 
 export default weatherSlice.reducer;
