@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Grommet } from 'grommet';
+import {BrowserRouter} from "react-router-dom";
+import Router from "./router/router";
 
 const theme = {
   global: {
@@ -17,19 +19,11 @@ const theme = {
 
 function App(props) {
   return (
-    <Grommet theme={theme}>
-      <Box
-        tag='header'
-        direction='row'
-        align='center'
-        justify='between'
-        background='brand'
-        pad={{ left: 'medium', right: 'small', vertical: 'small'}}
-        elevation='medium'
-        style={{ zIndex: '1' }}
-        {...props}
-      />
-    </Grommet>
+      <BrowserRouter>
+        <Grommet theme={theme}>
+          <Router/>
+        </Grommet>
+      </BrowserRouter>
   );
 }
 
