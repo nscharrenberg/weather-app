@@ -1,28 +1,25 @@
 import React from 'react';
-import { Box, Grommet } from 'grommet';
 import {BrowserRouter} from "react-router-dom";
 import Router from "./router/router";
+import {createTheme, ThemeProvider} from "@mui/material";
 
-const theme = {
-  global: {
-    colors: {
-      brand: '#4AD6ED',
-      secondary: '#ffed00'
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#4ad7ed',
+        },
+        secondary: {
+            main: '#ffed00',
+        },
     },
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px',
-    },
-  },
-};
+})
 
-function App(props) {
+function App() {
   return (
       <BrowserRouter>
-        <Grommet theme={theme}>
+        <ThemeProvider theme={theme}>
           <Router/>
-        </Grommet>
+        </ThemeProvider>
       </BrowserRouter>
   );
 }
