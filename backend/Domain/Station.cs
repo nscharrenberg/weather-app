@@ -16,8 +16,8 @@ namespace Domain
             Measurements = new List<Measurement>();
         }
 
-        public int Id { get; }
-        public int StationId { get; private set; }
+        public int Id { get; set; }
+        public int StationId { get; set; }
         public string Name { get; set; }
         public string Region { get; set; }
         public List<Measurement> Measurements { get; set; }

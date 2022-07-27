@@ -8,8 +8,8 @@ namespace Domain
 {
     public class Measurement
     {
-        public int Id { get; }
-        public Station Station { get; private set; }
+        public int Id { get; set; }
+        public Station Station { get; set; }
         public DateTime Timestamp { get; set; }
         public double Temperature { get; set; }
         public double FeelTemperature { get; set; }
