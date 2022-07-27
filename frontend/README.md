@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+<br/>
+<p align="center">
+  <a href="https://github.com/nscharrenberg/weather-app">
+    <img src="https://introductie-cases.educom.nu/assets/images/eweather-logo-e008be849d6643601042bd5d80d566bc.png" alt="Logo" width="200" height="80">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">eWeather Frontend</h3>
 
-## Available Scripts
+  <p align="center">
+    Quickly watch the dutch weather
+    <br/>
+    <br/>
+    <a href="https://github.com/nscharrenberg/weather-app">View Demo</a>
+    .
+  </p>
+</p>
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table Of Contents
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* [About the Project](#about-the-project)
+* [Built With](#built-with)
+* [Getting Started](#getting-started)
+    * [Prerequisites](#prerequisites)
+    * [Installation](#installation)
+* [Usage](#usage)
+* [Adjustments](#adjustments)
+* [Authors](#authors)
 
-### `npm test`
+## About The Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Screen Shot](https://github.com/nscharrenberg/weather-app/blob/dev/demo/frontend.png?raw=true)
 
-### `npm run build`
+An easy to use weather application utilizing buienradar.nl to show the dutch local weather information.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Built With
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+* [React](https://reactjs.org/)
+* [Material UI](https://mui.com/material-ui)
+* [Font Awesome](https://fontawesome.com/v6)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To get a local copy up and running follow these steps.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Before being able to run the project, it's expected to have the following prerequisites:
+- [Node.js](https://nodejs.org/en/)
+- [NPM](https://www.npmjs.com/) ( installed with node.js)
+- Git
 
-## Learn More
+### Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Clone the repository
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+git clone git@github.com:nscharrenberg/weather-app.git
+```
 
-### Code Splitting
+2. Open a terminal on the `frontend` directory.
+   for example:
+```sh
+cd ~/weatherapp/frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. Install NPM packages
 
-### Analyzing the Bundle Size
+```sh
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Start the application
 
-### Making a Progressive Web App
+```sh
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Usage
 
-### Advanced Configuration
+Once the application is running, it should automatically open a browser window and load the application. (`http://localhost:3000` will most likely be the address).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+You should see a similar view as shown in "About The Project".
 
-### Deployment
+Now click on "Weather Station or City" and search for the city (region) or weather station you want to get information from.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Selecting the weather station option will show its current weather data to you.
 
-### `npm run build` fails to minify
+Information such as:
+- Current Temperature
+- Feel Temperature
+- Ground Temperature
+- Solar Strength
+- Rain the past hour
+- Wind Direction
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Adjustments
+
+A brief mention on some aspects that either should be present or have been altered for the sake of time or resources.
+
+1.  Icons have been altered, as some of them are part of the "PRO' package of Font Awesome, and thus not available.
+2. Material UI has been used as a UI framework to speed up the development process, and keep the design to industry standard.
+3. Filtering is done based on the Region and Weather Station. So "Arcen" and "Venlo"  will both show "Meetstation Arcen (Venlo)"
+4. Testing has not been performed due to time limitations. However, some tests that could have been performed were unit tests on testing specific components such as the Autocomplete, or displaying of weather data.
+
+Due to the size of the application, this has been simply tested manually by performing actions.
+
+## Authors
+
+* **Noah Scharrenberg** - *Software Developer* - [Noah Scharrenberg](https://github.com/nscharrenberg/) - **
