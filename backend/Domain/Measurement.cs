@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    internal class Measurement
+    public class Measurement
     {
         public int Id { get; }
         public Station Station { get; private set; }
