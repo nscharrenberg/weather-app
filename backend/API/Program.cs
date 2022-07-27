@@ -1,4 +1,6 @@
 using Data;
+using Data.Repositories;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,10 @@ builder.Services.AddSwaggerGen();
 
 // Add Local SQLite Database
 builder.Services.AddDbContext<StationContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

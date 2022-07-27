@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace Data.Repositories
     {
         public StationRepository(StationContext context) : base(context)
         {
+        }
+
+        public override IEnumerable<Station> GetAll()
+        {
+            return context.Station.Include(s => s.Measurements).ToList();
         }
 
         public Station? FindOrCreate(Station station)

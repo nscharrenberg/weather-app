@@ -16,7 +16,7 @@ namespace Data.Repositories
 
         public IEnumerable<Measurement> GetByStationAndTimestampRange(Station station, DateTime start, DateTime end)
         {
-            return context.Set<Measurement>().Where((Measurement measurement) => (measurement.Station.Equals(station) && measurement.Timestamp >= start && measurement.Timestamp <= end));
+            return context.Set<Measurement>().Where((Measurement measurement) => (measurement.Station.Equals(station) && measurement.Timestamp >= start && measurement.Timestamp <= end)).ToList();
         }
     }
 }

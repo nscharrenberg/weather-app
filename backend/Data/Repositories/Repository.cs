@@ -12,27 +12,27 @@ namespace Data.Repositories
             this.context = context;
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             context.Set<T>().Add(entity);
         }
 
-        public void AddRange(IEnumerable<T> entities)
+        public virtual void AddRange(IEnumerable<T> entities)
         {
             context.Set<T>().AddRange(entities);
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        public virtual IEnumerable<T> Find(Expression<Func<T, bool>> expression)
         {
             return context.Set<T>().Where(expression);
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return context.Set<T>().ToList();
         }
 
-        public T? GetById(int id)
+        public virtual T? GetById(int id)
         {
             // TODO: Catch this properly or perform appropriate action
             return context.Set<T>().Find(id);
