@@ -4,7 +4,7 @@ const getWeatherService = () => {
     const apiService = getApiService();
     const baseUrl = apiService.baseUrl;
 
-    const getData = () => {
+    const getMeasurements = () => {
         const options = {
             method: 'GET',
             headers: {
@@ -13,36 +13,24 @@ const getWeatherService = () => {
         };
 
         return apiService.request(baseUrl, options).then((response) => {
-            return response.json();
-        });
-    }
+            return response.json().then(res => {
+                if (res == null || res.actual == null) {
+                    return [];
+                }
 
-    const getAvailableCities = (data) => {
-        if (data === undefined || data == null) {
-            return [];
-        }
+                const meassurements = res.actual.stationmeasurements;
 
-        if (data.actual == null) {
-            return [];
-        }
+                if (meassurements == null) {
+                    return [];
+                }
 
-        const meassurements = data.actual.stationmeasurements;
-
-        if (meassurements === undefined || meassurements === null) {
-            return [];
-        }
-
-        return meassurements.map((item) => {
-            return {
-                label: item.regio,
-                id: item.$id
-            }
+                return meassurements;
+            });
         });
     }
 
     return {
-        getData,
-        getAvailableCities
+        getMeasurements
     }
 };
 
