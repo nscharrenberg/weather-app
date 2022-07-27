@@ -10,6 +10,7 @@ namespace Domain
     {
         public int Id { get; }
         public Station Station { get; private set; }
+        public DateTime Timestamp { get; set; }
         public double Temperature { get; set; }
         public double FeelTemperature { get; set; }
         public double GroundTemperature { get; set; }
