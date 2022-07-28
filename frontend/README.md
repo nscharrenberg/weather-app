@@ -41,6 +41,7 @@ An easy to use weather application utilizing buienradar.nl to show the dutch loc
 * [React](https://reactjs.org/)
 * [Material UI](https://mui.com/material-ui)
 * [Font Awesome](https://fontawesome.com/v6)
+* [Recharts](https://recharts.org/)
 
 ## Getting Started
 
