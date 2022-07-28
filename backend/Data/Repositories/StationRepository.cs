@@ -35,7 +35,7 @@ namespace Data.Repositories
 
         public Station? GetByStationId(int stationId)
         {
-            return context.Set<Station>().Find((Station station) => station.StationId == stationId);    
+            return context.Set<Station>().Where((Station station) => station.StationId == stationId).Include(s => s.Measurements).First();    
         }
 
       
