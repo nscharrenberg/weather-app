@@ -4,6 +4,7 @@ import {Button, Grid, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {setEndDate, setLoading, setOverview, setSelectedStation, setStartDate, setStations} from "../../store/weather";
 import {getWeatherService} from "../../services";
+import GraphOverview from "./GraphOverview";
 
 const DateTimeRangePicker = () => {
     const [start, setLocalStart] = useState(new Date());
@@ -30,7 +31,7 @@ const DateTimeRangePicker = () => {
     return (
         <Fragment>
             <Grid container spacing={2}>
-                <Grid item md={5}>
+                <Grid item md={5} xs={12}>
                     <DateTimePicker
                         renderInput={(props) => <TextField fullWidth {...props} />}
                         label="Start Date & Time"
@@ -44,7 +45,7 @@ const DateTimeRangePicker = () => {
                     />
                 </Grid>
 
-                <Grid item md={5}>
+                <Grid item md={5} xs={12}>
                     <DateTimePicker
                         renderInput={(props) => <TextField fullWidth {...props} />}
                         label="End Date Time"
@@ -58,8 +59,11 @@ const DateTimeRangePicker = () => {
                         minDateTime={start}
                     />
                 </Grid>
-                <Grid item md={2}>
+                <Grid item md={2} xs={12}>
                     <Button onClick={() => filterData()} fullWidth variant="contained">Filter</Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <GraphOverview/>
                 </Grid>
             </Grid>
         </Fragment>

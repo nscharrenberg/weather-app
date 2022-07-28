@@ -15,6 +15,7 @@ export const weatherSlice = createSlice({
     reducers: {
         setSelectedStation: (state, action) => {
             state.selectedStation = action.payload;
+            state.overview = [];
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
