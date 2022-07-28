@@ -1,3 +1,4 @@
+using API.Tasks;
 using Data;
 using Data.Repositories;
 using Domain.Interfaces;
@@ -13,11 +14,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add Local SQLite Database
-builder.Services.AddDbContext<StationContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddDbContext<StationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHostedService<WeatherMeasuringService>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

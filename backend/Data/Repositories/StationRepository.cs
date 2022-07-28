@@ -30,12 +30,19 @@ namespace Data.Repositories
             }
 
             Add(station);
-            return null;
+
+            return GetByStationId(station.StationId);
         }
 
         public Station? GetByStationId(int stationId)
         {
-            return context.Set<Station>().Where((Station station) => station.StationId == stationId).Include(s => s.Measurements).First();    
+            try
+            {
+                return context.Set<Station>().Where((Station station) => station.StationId == stationId).Include(s => s.Measurements).First();
+            } catch (InvalidOperationException e)
+            {
+                return null;
+            }
         }
 
       

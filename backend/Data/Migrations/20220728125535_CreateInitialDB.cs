@@ -13,11 +13,11 @@ namespace Data.Migrations
                 name: "Station",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    StationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Region = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StationId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,16 +28,16 @@ namespace Data.Migrations
                 name: "Measurement",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    StationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Temperature = table.Column<double>(type: "REAL", nullable: false),
-                    FeelTemperature = table.Column<double>(type: "REAL", nullable: false),
-                    GroundTemperature = table.Column<double>(type: "REAL", nullable: false),
-                    WindDirection = table.Column<string>(type: "TEXT", nullable: false),
-                    SunPower = table.Column<int>(type: "INTEGER", nullable: false),
-                    RainFallLastDay = table.Column<double>(type: "REAL", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StationId = table.Column<int>(type: "int", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Temperature = table.Column<double>(type: "float", nullable: false),
+                    FeelTemperature = table.Column<double>(type: "float", nullable: false),
+                    GroundTemperature = table.Column<double>(type: "float", nullable: false),
+                    WindDirection = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SunPower = table.Column<int>(type: "int", nullable: false),
+                    RainFallLastDay = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
