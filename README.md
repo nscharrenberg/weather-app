@@ -45,7 +45,7 @@ The Getting Started Guide for the frontend App is explained in the `frontend` di
 
 The Getting Started Guide for the backend App is explained in the `backend` directory.
 
-## Description about my Solution
+## Description about my Solution & Approach
 ### Frontend
 The frontend is made using React with the Material UI Framework, for its easiness in development, quick setup and standardized design.
 
@@ -78,8 +78,46 @@ Once the user has made its range selection, it has to press the `Filter` button,
 The `GraphOverview` will listen for changes to `overview` and show the data appropriately in a graph.
 
 ### Backend
+The backend is made using ASP.NET Core.
 
-## Description about my approach
+For the sake of showcasing how I'd work with bigger applications, I've stuck put to such structures. Even though this application is extremely small, and would therefore not really benefit for it besides adding structural complexity.
+
+The backend is split into three projects:
+- API -> Contains the Api Specific Logic
+  - Controllers -> The Api Controllers
+  - Profiles -> ViewModel System that AutoMapper Uses to map Models with ViewModels.
+  - Queries -> Request Parameters the Controller methods use
+  - Tasks -> Recurring tasks that run in the background
+  - ViewModels -> The Viewmodels that are outputted by the Controllers
+- Data -> A Class Library which contains the Entity Framework specific Logic such as migrations and Repository Logic.
+  - Migrations -> The migrations that are used to populate the database
+  - Repositories -> The EntityFramework specific business logic
+- Domain -> A Class Library which contains the domain logic such as models and interfaces.
+  - Interfaces -> The standardized Interfaces
+
+The Api Url of buienradar and frequency at which we want to call it are specified in the `appsettings.json` on the `API` project.
+This is also where the database is specified (Sql Server for this app)
+
+The `API` exposes two routes, namely:
+- `GetAllStations` - `/api/Stations`
+- `GetStationByStationId` - `/api/stations/{stationId}`
+
+`GetAllStations` simply retrieves all `Station` records from the database and outputs them as json.
+
+`GetStationByStationId` uses the buienradar defined `stationid` to search the correct `stationId` from the application.
+Additionally two query parameters can be passed along for this route. These are `Start` and `End` which indicate the start date and end date of which the user wants to search the Station Weather Measurements.
+
+### How did I deal with certain problems?
+#### Cyclic Json References
+As Both `Measurement` and `Station` know about each other, when outputting `Station` with `Measurement` the controller would cause the output to go into an infinite loop, due to the fact that Station has Measurement and Measurement has Station (and so on). This issue can be resolved by the ViewModel principle, to which Model data is manipulated into a ViewModel.
+
+I knew from Java that there are tools such as `ModelMapper` that handle most difficult operations for such tasks, and that .NET Core would most likely have something similar. After a quick searhc I came across `AutoMapper` as one of the more popular approaches on using ViewModels. [docs](https://docs.automapper.org/en/stable/Getting-started.html)
+
+#### Background Services
+The second issue I had was using a non-singleton object (IUnitOfWork) in to a Singleton instance (WeatherMeasuringService).
+This service calls the buienradar API every X seconds and updates its own system with the data.
+
+Here I quickly noticed that ASP.NET Core did not like the DI that was happening on the IUnitOfWork instance, and after some searching I came across a stackoverflow page which mentioned that fact that a scope with the required service should be instantiated, instead of using the usual DI approach, by passing `IServiceScopeFactory` and creating the IUnitWork as a scope for that factory, instead of just passing `IUnitOfWork`.
 
 ## Adjustments
 
@@ -89,6 +127,7 @@ A brief mention on some aspects that either should be present or have been alter
 2. Material UI has been used as a UI framework to speed up the development process, and keep the design to industry standard.
 3. Filtering is done based on the Region and Weather Station. So "Arcen" and "Venlo"  will both show "Meetstation Arcen (Venlo)"
 4. Testing has not been performed due to time limitations. However, some tests that could have been performed were unit tests on testing specific components such as the Autocomplete, or displaying of weather data.
+5. I've kept the exception handling to the bare minimum. I'd generally make sure exceptions are dealt with appropriately.
 
 Due to the size of the application, this has been simply tested manually by performing actions.
 
