@@ -49,16 +49,80 @@ namespace API.Tasks
 
             for (int i = 0; i < measurements.GetArrayLength(); i++)
             {
-                int stationId = measurements[i].GetProperty("stationid").GetInt32();
-                string name = measurements[i].GetProperty("stationname").GetString();
-                string region = measurements[i].GetProperty("regio").ToString();
+                JsonElement stationData = measurements[i];
+
+                int stationId = stationData.GetProperty("stationid").GetInt32();
+                string name = stationData.GetProperty("stationname").GetString();
+                string region = stationData.GetProperty("regio").ToString();
 
                 Station station = new Station(stationId, name, region);
 
                 Station created = _unitOfWork.Station.FindOrCreate(station);
+                
+                DateTime timestamp = DateTime.Now;
+                double temperature = 0;
+                double feelTemperature = 0;
+                double groundTemperature = 0;
+                string windDirection = "";
+                int sunPower = 0;
+                double rainFallLastDay = 0;
+
+                if (stationData.TryGetProperty("timestamp", out JsonElement timestampElement))
+                {
+                    timestampElement.TryGetDateTime(out DateTime timestampOut);
+
+                    timestamp = timestampOut;
+                }
+
+                if (stationData.TryGetProperty("temperature", out JsonElement temperatureElement))
+                {
+                    temperatureElement.TryGetDouble(out double temperatureOut);
+
+                    temperature = temperatureOut;
+                }
+
+                if (stationData.TryGetProperty("feeltemperature", out JsonElement feelTemperatureElement))
+                {
+                    feelTemperatureElement.TryGetDouble(out double feelTemperatureOut);
+
+                    feelTemperature = feelTemperatureOut;
+                }
+
+                if (stationData.TryGetProperty("groundtemperature", out JsonElement groundTemperatureElement))
+                {
+                    groundTemperatureElement.TryGetDouble(out double groundTemperatureOut);
+
+                    groundTemperature = groundTemperatureOut;
+                }
+
+                if (stationData.TryGetProperty("winddirection", out JsonElement windDirectionElement))
+                {
+                    windDirection = windDirectionElement.GetString();
+                }
+
+                if (stationData.TryGetProperty("sunpower", out JsonElement sunPowerElement))
+                {
+                    sunPowerElement.TryGetDouble(out double sunPowerOut);
+
+                    sunPower = Convert.ToInt32(sunPowerOut);
+                }
+
+                if (stationData.TryGetProperty("rainFallLast24Hour", out JsonElement rainFaillLasstDayElement))
+                {
+                    rainFaillLasstDayElement.TryGetDouble(out double rainFaillLasstDayOut);
+
+                    rainFallLastDay = rainFaillLasstDayOut;
+                }
+
+
+                Measurement measurement = new Measurement(created, timestamp, temperature, feelTemperature, groundTemperature, windDirection, sunPower, rainFallLastDay);
+
+                _unitOfWork.Measurement.Add(measurement);
             }
 
             _unitOfWork.Save();
+
+            Console.WriteLine($"Recorded at {DateTime.Now}");
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Domain
 {
     public class Station
     {
+        public Station() { }
         public Station(int stationId, string name, string region)
         {
             StationId = stationId;
