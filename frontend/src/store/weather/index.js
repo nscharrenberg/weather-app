@@ -5,7 +5,7 @@ export const weatherSlice = createSlice({
     initialState: {
         selectedStation: null,
         loading: false,
-        measurements: []
+        stations: []
     },
     reducers: {
         setSelectedStation: (state, action) => {
@@ -14,12 +14,12 @@ export const weatherSlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
-        setMeasurements: (state, action) => {
-            state.measurements = action.payload;
+        setStations: (state, action) => {
+            state.stations = action.payload;
         }
     }
 });
 
-export const { setLoading, setSelectedStation, setMeasurements } = weatherSlice.actions;
+export const { setLoading, setSelectedStation, setStations } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

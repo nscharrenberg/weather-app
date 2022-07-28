@@ -1,9 +1,7 @@
 const home = "/";
-const weather = "/weather/:city";
 
 const routes = {
-    home,
-    weather
+    home
 };
 
 export default routes;

@@ -4,7 +4,7 @@ const getWeatherService = () => {
     const apiService = getApiService();
     const baseUrl = apiService.baseUrl;
 
-    const getMeasurements = () => {
+    const getStations = () => {
         const options = {
             method: 'GET',
             headers: {
@@ -12,25 +12,45 @@ const getWeatherService = () => {
             }
         };
 
-        return apiService.request(baseUrl, options).then((response) => {
+        return apiService.request(`${baseUrl}Station`, options).then((response) => {
             return response.json().then(res => {
-                if (res == null || res.actual == null) {
+                if (res == null) {
                     return [];
                 }
 
-                const meassurements = res.actual.stationmeasurements;
-
-                if (meassurements == null) {
-                    return [];
-                }
-
-                return meassurements;
+                return res;
             });
         });
     }
 
+    const getStationByStationId =(stationId, startDate = null, endDate = null) => {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+
+        let url = `${baseUrl}Station/${stationId}`;
+
+        if (startDate != null) {
+            url += `?Start=${startDate}`;
+
+            if (endDate != null) {
+                url += `&End=${endDate}`;
+            }
+        }
+
+        return apiService.request(url, options).then((response) => {
+            return response.json().then((res) => {
+                return res;
+            })
+        })
+    }
+
     return {
-        getMeasurements
+        getStations,
+        getStationByStationId,
     }
 };
 
