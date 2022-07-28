@@ -58,7 +58,7 @@ namespace API.Tasks
                 Station station = new Station(stationId, name, region);
 
                 Station created = _unitOfWork.Station.FindOrCreate(station);
-                
+
                 DateTime timestamp = DateTime.Now;
                 double temperature = 0;
                 double feelTemperature = 0;
@@ -115,9 +115,9 @@ namespace API.Tasks
                 }
 
 
-                Measurement measurement = new Measurement(created, timestamp, temperature, feelTemperature, groundTemperature, windDirection, sunPower, rainFallLastDay);
+                Measurement measurement = new Measurement(_unitOfWork.Station.GetByStationId(stationId), timestamp, temperature, feelTemperature, groundTemperature, windDirection, sunPower, rainFallLastDay);
 
-                _unitOfWork.Measurement.Add(measurement);
+                _unitOfWork.Measurement.AddByStationAndNewTimestamp(measurement);
             }
 
             _unitOfWork.Save();
