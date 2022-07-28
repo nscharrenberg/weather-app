@@ -2,6 +2,8 @@ import React from 'react';
 import {BrowserRouter} from "react-router-dom";
 import Router from "./router/router";
 import {createTheme, ThemeProvider} from "@mui/material";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
 
 const theme = createTheme({
     palette: {
@@ -18,7 +20,9 @@ function App() {
   return (
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <Router/>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+                <Router/>
+            </LocalizationProvider>
         </ThemeProvider>
       </BrowserRouter>
   );

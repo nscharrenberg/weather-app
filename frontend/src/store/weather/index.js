@@ -5,7 +5,12 @@ export const weatherSlice = createSlice({
     initialState: {
         selectedStation: null,
         loading: false,
-        stations: []
+        stations: [],
+        filter: {
+            startDate: null,
+            endDate: null,
+        },
+        overview: []
     },
     reducers: {
         setSelectedStation: (state, action) => {
@@ -16,10 +21,19 @@ export const weatherSlice = createSlice({
         },
         setStations: (state, action) => {
             state.stations = action.payload;
+        },
+        setStartDate: (state, action) => {
+            state.filter.startDate = action.payload;
+        },
+        setEndDate: (state, action) => {
+            state.filter.endDate = action.payload;
+        },
+        setOverview: (state, action) => {
+            state.overview = action.payload;
         }
     }
 });
 
-export const { setLoading, setSelectedStation, setStations } = weatherSlice.actions;
+export const { setLoading, setSelectedStation, setStations, setStartDate, setEndDate, setOverview } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

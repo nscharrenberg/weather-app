@@ -3,6 +3,7 @@ import {Card, CardContent, Grid, Typography} from "@mui/material";
 import {faTemperatureHigh, faTemperatureLow, faThermometerHalf, faSun, faCloudRain, faCompass} from "@fortawesome/free-solid-svg-icons";
 import {useSelector} from "react-redux";
 import WeatherCard from "./WeatherCard";
+import DateTimeRangePicker from "./DateTimeRangePicker";
 
 const WeatherInfo = () => {
 
@@ -17,7 +18,7 @@ const WeatherInfo = () => {
     }
 
     const measurements = selectedStation.measurements;
-    
+
   return (
       <Fragment>
           <Grid container spacing={2}>
@@ -40,6 +41,8 @@ const WeatherInfo = () => {
                   <WeatherCard title="Windrichting" value={measurements[measurements.length-1].windDirection ? measurements[measurements.length-1].windDirection : '?'} icon={faCompass} />
               </Grid>
           </Grid>
+
+          <DateTimeRangePicker/>
       </Fragment>
   )
 };
