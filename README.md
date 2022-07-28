@@ -46,6 +46,38 @@ The Getting Started Guide for the frontend App is explained in the `frontend` di
 The Getting Started Guide for the backend App is explained in the `backend` directory.
 
 ## Description about my Solution
+### Frontend
+The frontend is made using React with the Material UI Framework, for its easiness in development, quick setup and standardized design.
+
+The general structure of the frontend application is as follows:
+- src
+  - components -> Contains single decoupled components
+  - router -> Contains the page routes
+  - services -> Contains the service logic such as API calls
+  - store -> Contains local memory structure (state)
+  - views -> Contains the page views
+
+**Components** contains single decoupled components that can be used in pages. Think about the Searchbar, Graph, Temperature Information, and so on.
+
+**Router** contains the page routes, in the end it was only one page that was being used, so this router wouldn't have been necessary.
+
+**Services** contains the API logic to the backend server, making the calls that are necessary.
+
+**Store** contains all the local memory. As it's a small app, only one state module is necessary, which is `weather`. This contains the necessary information the frontend app needs, such as all the stations with their measurements, the selected station (of which we want to see the information), filters, and measurements from the filters.
+
+**views** contains the page views. As it's a small application only one page is present. 
+
+#### Main Flow of the Application
+The `SearchBar` will call the necessary `services` for weather information of all the stations and store them in the `store` as `stations`.
+When the `value` of `SearchBar` is changed (so a station is selected), it will store this `value` to the `store` as `selectedStation`.
+
+The `WeatherInfo` will listen for changes to `selectedStation` and show waether information using `WeatherCard` replications with data such as temperature, sun power, Ground Temperature, and so on.
+
+The user could alternatively also get an overview of the data over a certain timespan of measurements, which the `DateTimeRangePicker` handles. Here the `EndDate` can not be before the `StartDate` and is limited as such in the users selection process. 
+Once the user has made its range selection, it has to press the `Filter` button, to which the `service` will be called again and its value will be stored in the `store` as `overview`.
+The `GraphOverview` will listen for changes to `overview` and show the data appropriately in a graph.
+
+### Backend
 
 ## Description about my approach
 
@@ -62,5 +94,4 @@ Due to the size of the application, this has been simply tested manually by perf
 
 ## Authors
 
-* **Noah Scharrenberg** - *Software Developer* - [Noah Scharrenberg](https://github.com/nscharrenberg/) - **
-* **** - ** - []() - **
+* **Noah Scharrenberg** - *Software Developer* - [Noah Scharrenberg](https://github.com/nscharrenberg/)
