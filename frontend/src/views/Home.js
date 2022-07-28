@@ -1,6 +1,5 @@
-import React, {Fragment, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {AppBar, Card, CardContent, CardMedia, Container, Grid, Toolbar, Typography} from "@mui/material";
+import React, {Fragment} from 'react';
+import {AppBar, Card, CardMedia, Container, Grid, Toolbar} from "@mui/material";
 import SearchBar from "../components/SearchBar/SearchBar";
 import WeatherInfo from "../components/WeatherInfo/WeatherInfo";
 

@@ -1,10 +1,8 @@
 const getApiService = () => {
-    const baseUrl = "https://data.buienradar.nl/2.0/feed/json";
+    const baseUrl = "https://localhost:7192/api/";
 
     const request = async (url, options) => {
-        const response = await fetch(url, options);
-
-        return response;
+        return await fetch(url, options);
     };
 
     return {

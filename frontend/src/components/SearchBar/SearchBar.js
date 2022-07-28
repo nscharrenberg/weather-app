@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {
     Autocomplete,
     createFilterOptions,
@@ -6,23 +6,23 @@ import {
 } from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {getWeatherService} from "../../services";
-import {setLoading, setMeasurements, setSelectedStation} from "../../store/weather";
+import {setLoading, setStations, setSelectedStation} from "../../store/weather";
 
 const SearchBar = () => {
     const dispatch = useDispatch();
-    const measurements = useSelector((state) => state.weather.measurements);
+    const stations = useSelector((state) => state.weather.stations);
 
     // Autocomplete search based on regio and station name (excluding "Meetstation" from searching)
     const filterOptions = createFilterOptions({
         matchFrom: 'any',
-        stringify: (option) => ` ${option.regio}-${option.stationname.replace('Meetstation ', '')}`
+        stringify: (option) => ` ${option.region}-${option.name.replace('Meetstation ', '')}`
     });
 
     // Reload data on component load or raw weatherData change
     useEffect(() => {
         dispatch(setLoading(true));
-        getWeatherService().getMeasurements().then((res) => {
-            dispatch(setMeasurements(res));
+        getWeatherService().getStations().then((res) => {
+            dispatch(setStations(res));
             dispatch(setLoading(false));
         });
     }, [dispatch])
@@ -30,14 +30,14 @@ const SearchBar = () => {
     return (
         <Fragment>
             <Autocomplete
-                options={measurements}
+                options={stations}
                 filterOptions={filterOptions}
                 renderOption={(props, option) => {
                     return (
-                        <li {...props} key={`station-${option.stationid}`}>{`${option.stationname} (${option.regio})`}</li>
+                        <li {...props} key={`station-${option.stationId}`}>{`${option.name} (${option.region})`}</li>
                     )
                 }}
-                getOptionLabel={(option) => `${option.stationname} (${option.regio})`}
+                getOptionLabel={(option) => `${option.name} (${option.region})`}
                 renderInput={(params) => <TextField {...params} label="Weather Station or City" />}
                 onChange={(event, newInputValue) => {
                     dispatch(setSelectedStation(newInputValue));
