@@ -13,7 +13,7 @@ const GraphOverview = () => {
 
     return (
         <Fragment>
-            <LineChart width={1200} height={500} data={overview}>
+            <LineChart width={1200} height={400} data={overview}>
                 <Line type="monotone" dataKey="temperature" stroke="#4ad6ed" activeDot={{ r: 8 }} />
                 <Line type="monotone" dataKey="feelTemperature" stroke="#59787D" />
                 <Line type="monotone" dataKey="groundTemperature" stroke="#46E3A1" />
